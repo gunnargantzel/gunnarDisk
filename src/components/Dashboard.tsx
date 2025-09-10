@@ -78,7 +78,7 @@ const Dashboard: React.FC = () => {
               </div>
               <div className="course-actions">
                 <button 
-                  onClick={() => handleDelete(course.cr597_disktabid!)}
+                  onClick={() => course.cr597_disktabid && handleDelete(course.cr597_disktabid)}
                   className="delete-btn"
                 >
                   Slett

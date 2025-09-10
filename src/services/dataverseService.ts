@@ -1,4 +1,4 @@
-import { PublicClientApplication } from '@azure/msal-browser';
+import { IPublicClientApplication } from '@azure/msal-browser';
 import { DATAVERSE_CONFIG, API_ENDPOINTS } from '../config/dataverseConfig';
 
 export interface DiskTabRecord {
@@ -26,9 +26,9 @@ export interface UpdateDiskTabRequest {
 }
 
 class DataverseService {
-  private msalInstance: PublicClientApplication;
+  private msalInstance: IPublicClientApplication;
 
-  constructor(msalInstance: PublicClientApplication) {
+  constructor(msalInstance: IPublicClientApplication) {
     this.msalInstance = msalInstance;
   }
 
