@@ -36,10 +36,10 @@ const CourseForm: React.FC = () => {
 
     // Opprett diskgolfbane i Dataverse
     const result = await createDiskTab({
-      cr597_id: formData.name.trim(),
-      cr597_holes: parseInt(formData.holes),
-      cr597_description: formData.description.trim() || undefined,
-      cr597_location: formData.location.trim() || undefined
+      cr597_banenavn: formData.name.trim(),
+      cr597_antallkurver: parseInt(formData.holes),
+      cr597_beskrivelse: formData.description.trim() || undefined,
+      cr597_lokasjon: formData.location.trim() || undefined
     });
     
     if (result) {

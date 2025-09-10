@@ -17,10 +17,10 @@ export const DATAVERSE_CONFIG = {
   // Felter som skal brukes
   fields: {
     id: 'cr597_disktabid',
-    name: 'cr597_id', // Primary name field
-    holes: 'cr597_holes', // Antall kurver - må sjekkes mot faktisk tabell
-    description: 'cr597_description', // Beskrivelse - må sjekkes mot faktisk tabell
-    location: 'cr597_location', // Lokasjon - må sjekkes mot faktisk tabell
+    name: 'cr597_banenavn', // Banenavn
+    holes: 'cr597_antallkurver', // Antall kurver
+    description: 'cr597_beskrivelse', // Beskrivelse
+    location: 'cr597_lokasjon', // Lokasjon
     createdOn: 'createdon',
     modifiedOn: 'modifiedon'
   }

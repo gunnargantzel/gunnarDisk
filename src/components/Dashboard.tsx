@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { useMsal } from '@azure/msal-react';
 import { useDataverse } from '../hooks/useDataverse';
 import { DiskTabRecord } from '../services/dataverseService';
-import MetadataDebugger from './MetadataDebugger';
 
 const Dashboard: React.FC = () => {
   const { accounts } = useMsal();
@@ -33,7 +32,7 @@ const Dashboard: React.FC = () => {
   };
 
   const filteredCourses = courses.filter(course =>
-    course.cr597_id.toLowerCase().includes(searchTerm.toLowerCase())
+    course.cr597_banenavn.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -69,10 +68,13 @@ const Dashboard: React.FC = () => {
           filteredCourses.map((course) => (
             <div key={course.cr597_disktabid} className="course-item">
               <div className="course-info">
-                <h4>{course.cr597_id}</h4>
-                {/* Midlertidig: kun vis cr597_id inntil vi finner de riktige feltnavnene */}
-                <p>ID: {course.cr597_disktabid}</p>
-                {/* TODO: Legg til andre felter når vi finner de riktige navnene */}
+                <h4>{course.cr597_banenavn}</h4>
+                <p>Antall kurver: {course.cr597_antallkurver}</p>
+                {course.cr597_beskrivelse && <p>Beskrivelse: {course.cr597_beskrivelse}</p>}
+                {course.cr597_lokasjon && <p>Lokasjon: {course.cr597_lokasjon}</p>}
+                {course.createdon && (
+                  <p>Registrert: {new Date(course.createdon).toLocaleDateString('no-NO')}</p>
+                )}
               </div>
               <div className="course-actions">
                 <button 
@@ -92,8 +94,6 @@ const Dashboard: React.FC = () => {
           Legg til ny diskgolfbane
         </button>
       </Link>
-      
-      <MetadataDebugger />
     </div>
   );
 };
