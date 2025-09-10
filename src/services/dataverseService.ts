@@ -48,14 +48,31 @@ class DataverseService {
       const response = await this.msalInstance.acquireTokenSilent(silentRequest);
       return response.accessToken;
     } catch (error) {
-      // Hvis silent token acquisition feiler, prøv popup
-      const popupRequest = {
-        scopes: dataverseScopes,
-        prompt: 'select_account'
-      };
-      
-      const response = await this.msalInstance.acquireTokenPopup(popupRequest);
-      return response.accessToken;
+      // Hvis silent token acquisition feiler, prøv popup først
+      try {
+        const popupRequest = {
+          scopes: dataverseScopes,
+          prompt: 'select_account'
+        };
+        
+        const response = await this.msalInstance.acquireTokenPopup(popupRequest);
+        return response.accessToken;
+      } catch (popupError: any) {
+        // Hvis popup feiler (blokkert), bruk redirect
+        if (popupError.errorCode === 'popup_window_error' || 
+            popupError.errorCode === 'empty_window_error') {
+          console.log('Popup blokkert for Dataverse token, bruker redirect...');
+          const redirectRequest = {
+            scopes: dataverseScopes,
+            prompt: 'select_account'
+          };
+          
+          const response = await this.msalInstance.acquireTokenRedirect(redirectRequest);
+          return response.accessToken;
+        } else {
+          throw popupError;
+        }
+      }
     }
   }
 

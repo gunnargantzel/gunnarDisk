@@ -48,6 +48,17 @@ export const loginRequest: PopupRequest = {
   prompt: 'select_account',
 };
 
+// Redirect-basert login request (fallback for popup-blokkering)
+export const loginRedirectRequest = {
+  scopes: [
+    'User.Read',
+    'openid',
+    'profile',
+    'offline_access'
+  ],
+  prompt: 'select_account',
+};
+
 // Dataverse-spesifikke scopes
 export const dataverseScopes = [
   'https://org5ce5b264.crm4.dynamics.com/.default'
