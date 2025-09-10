@@ -6,6 +6,10 @@ import Dashboard from './components/Dashboard';
 import CourseForm from './components/CourseForm';
 import './App.css';
 
+// Versjon informasjon
+const APP_VERSION = '1.0.0';
+const BUILD_DATE = new Date().toLocaleDateString('no-NO');
+
 const App: React.FC = () => {
   const isAuthenticated = useIsAuthenticated();
   const { instance } = useMsal();
@@ -13,7 +17,12 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Diskgolf PWA</h1>
+        <div className="header-left">
+          <h1>Diskgolf PWA</h1>
+          <div className="version-info">
+            v{APP_VERSION} • {BUILD_DATE}
+          </div>
+        </div>
         {isAuthenticated && (
           <button 
             onClick={() => instance.logoutPopup()}
@@ -36,6 +45,14 @@ const App: React.FC = () => {
           />
         </Routes>
       </main>
+      
+      <footer className="App-footer">
+        <div className="footer-content">
+          <span>Diskgolf PWA v{APP_VERSION}</span>
+          <span>•</span>
+          <span>Bygget {BUILD_DATE}</span>
+        </div>
+      </footer>
     </div>
   );
 };

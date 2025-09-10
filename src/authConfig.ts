@@ -15,7 +15,10 @@ export const msalConfig: Configuration = {
 
 // Legg til scopes som appen trenger tilgang til
 export const loginRequest: PopupRequest = {
-  scopes: ['User.Read'],
+  scopes: [
+    'User.Read',
+    'https://org5ce5b264.crm4.dynamics.com/.default'
+  ],
   prompt: 'select_account',
 };
 

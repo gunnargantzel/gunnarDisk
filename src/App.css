@@ -13,6 +13,19 @@
   align-items: center;
 }
 
+.header-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.version-info {
+  font-size: 12px;
+  color: #ccc;
+  margin-top: 4px;
+  font-weight: normal;
+}
+
 .App-header h1 {
   margin: 0;
   font-size: 1.5rem;
@@ -122,6 +135,65 @@
   margin: 10px 0;
   border-radius: 4px;
   border-left: 4px solid #0078d4;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.course-info {
+  flex: 1;
+}
+
+.course-actions {
+  margin-left: 15px;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.delete-btn:hover {
+  background-color: #c82333;
+}
+
+.course-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.search-box input {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  width: 250px;
+}
+
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 12px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.error-message button {
+  background: none;
+  border: none;
+  color: #721c24;
+  cursor: pointer;
+  font-weight: bold;
 }
 
 .add-course-btn {
@@ -139,6 +211,22 @@
   background-color: #106ebe;
 }
 
+.App-footer {
+  background-color: #f8f9fa;
+  padding: 15px 20px;
+  border-top: 1px solid #e9ecef;
+  text-align: center;
+  color: #6c757d;
+  font-size: 14px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
 @media (max-width: 768px) {
   .App-header {
     flex-direction: column;
@@ -154,5 +242,30 @@
   .course-form {
     margin: 20px 0;
     padding: 20px;
+  }
+  
+  .footer-content {
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .course-list-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .search-box input {
+    width: 100%;
+  }
+  
+  .course-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .course-actions {
+    margin-left: 0;
+    margin-top: 10px;
   }
 }

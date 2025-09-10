@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDataverse } from '../hooks/useDataverse';
 
 const CourseForm: React.FC = () => {
   const navigate = useNavigate();
+  const { createDiskTab, loading, error, clearError } = useDataverse();
   const [formData, setFormData] = useState({
     name: '',
     holes: '',
-    description: ''
+    description: '',
+    location: ''
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,7 +20,7 @@ const CourseForm: React.FC = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Validering
@@ -31,17 +34,32 @@ const CourseForm: React.FC = () => {
       return;
     }
 
-    // Her vil vi senere integrere med Dataverse
-    console.log('Nye diskgolfbane:', formData);
+    // Opprett diskgolfbane i Dataverse
+    const success = await createDiskTab({
+      cr597_id: formData.name.trim(),
+      cr597_holes: parseInt(formData.holes),
+      cr597_description: formData.description.trim() || undefined,
+      cr597_location: formData.location.trim() || undefined
+    });
     
-    // For nå, bare naviger tilbake til dashboard
-    alert('Diskgolfbane registrert! (Demo-modus)');
-    navigate('/');
+    if (success) {
+      alert('Diskgolfbane registrert!');
+      navigate('/');
+    } else {
+      alert('Feil ved registrering av diskgolfbane. Prøv igjen.');
+    }
   };
 
   return (
     <div className="course-form">
       <h2>Registrer ny Diskgolfbane</h2>
+      
+      {error && (
+        <div className="error-message">
+          <p>{error}</p>
+          <button onClick={clearError}>Lukk</button>
+        </div>
+      )}
       
       <form onSubmit={handleSubmit}>
         <div className="form-group">
@@ -83,8 +101,20 @@ const CourseForm: React.FC = () => {
           />
         </div>
         
-        <button type="submit" className="submit-btn">
-          Registrer Diskgolfbane
+        <div className="form-group">
+          <label htmlFor="location">Lokasjon (valgfri)</label>
+          <input
+            type="text"
+            id="location"
+            name="location"
+            value={formData.location}
+            onChange={handleInputChange}
+            placeholder="F.eks. Oslo, Norge"
+          />
+        </div>
+        
+        <button type="submit" className="submit-btn" disabled={loading}>
+          {loading ? 'Registrerer...' : 'Registrer Diskgolfbane'}
         </button>
       </form>
       
