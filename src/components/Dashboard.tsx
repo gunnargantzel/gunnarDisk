@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useMsal } from '@azure/msal-react';
 import { useDataverse } from '../hooks/useDataverse';
@@ -12,15 +12,15 @@ const Dashboard: React.FC = () => {
 
   const user = accounts[0];
 
+  const loadCourses = useCallback(async () => {
+    const data = await getAllDiskTabs();
+    setCourses(data);
+  }, [getAllDiskTabs]);
+
   // Hent alle diskgolfbaner ved lasting
   useEffect(() => {
     loadCourses();
-  }, []);
-
-  const loadCourses = async () => {
-    const data = await getAllDiskTabs();
-    setCourses(data);
-  };
+  }, [loadCourses]);
 
   const handleDelete = async (id: string) => {
     if (window.confirm('Er du sikker på at du vil slette denne diskgolfbanen?')) {
