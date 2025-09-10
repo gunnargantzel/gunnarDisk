@@ -3,7 +3,7 @@ import { Configuration, PopupRequest } from '@azure/msal-browser';
 // MSAL konfigurasjon
 export const msalConfig: Configuration = {
   auth: {
-    clientId: 'YOUR_CLIENT_ID', // Dette må endres til din app registrering client ID
+    clientId: 'f449a06d-e2c7-4a10-b7ed-f859e622b2d7', // App registrering client ID
     authority: 'https://login.microsoftonline.com/fb7e0b12-d8fc-4f14-bd1a-ad9c8667a7e6',
     redirectUri: window.location.origin,
   },
