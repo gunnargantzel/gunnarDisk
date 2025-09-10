@@ -11,7 +11,7 @@ interface Course {
 
 const Dashboard: React.FC = () => {
   const { accounts } = useMsal();
-  const [courses, setCourses] = useState<Course[]>([
+  const [courses] = useState<Course[]>([
     // Eksempeldata for demonstrasjon
     {
       id: '1',
