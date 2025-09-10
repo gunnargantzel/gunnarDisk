@@ -11,6 +11,30 @@ export const msalConfig: Configuration = {
     cacheLocation: 'sessionStorage', // Denne konfigurasjonen er valgfri
     storeAuthStateInCookie: false, // Sett til true hvis du har problemer med IE11 eller Edge
   },
+  system: {
+    loggerOptions: {
+      loggerCallback: (level, message, containsPii) => {
+        if (containsPii) {
+          return;
+        }
+        switch (level) {
+          case 0: // LogLevel.Error
+            console.error(message);
+            return;
+          case 1: // LogLevel.Warning
+            console.warn(message);
+            return;
+          case 2: // LogLevel.Info
+            console.info(message);
+            return;
+          case 3: // LogLevel.Verbose
+            console.debug(message);
+            return;
+        }
+      }
+    },
+    allowNativeBroker: false // Disable WAM broker
+  },
 };
 
 // Legg til scopes som appen trenger tilgang til

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useIsAuthenticated, useMsal } from '@azure/msal-react';
 import LoginPage from './components/LoginPage';
@@ -13,6 +13,19 @@ const BUILD_DATE = new Date().toLocaleDateString('no-NO');
 const App: React.FC = () => {
   const isAuthenticated = useIsAuthenticated();
   const { instance } = useMsal();
+
+  // Initialiser MSAL ved oppstart
+  useEffect(() => {
+    const initializeMsal = async () => {
+      try {
+        await instance.initialize();
+      } catch (error) {
+        console.error('MSAL initialization error:', error);
+      }
+    };
+
+    initializeMsal();
+  }, [instance]);
 
   return (
     <div className="App">
