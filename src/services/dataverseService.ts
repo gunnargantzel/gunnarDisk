@@ -93,11 +93,10 @@ class DataverseService {
   async createDiskTab(data: CreateDiskTabRequest): Promise<DiskTabRecord> {
     const url = API_ENDPOINTS.tableUrl;
     
+    // Midlertidig: kun bruk cr597_id inntil vi finner de riktige feltnavnene
     const payload = {
-      [DATAVERSE_CONFIG.fields.name]: data.cr597_id,
-      [DATAVERSE_CONFIG.fields.holes]: data.cr597_holes,
-      [DATAVERSE_CONFIG.fields.description]: data.cr597_description || '',
-      [DATAVERSE_CONFIG.fields.location]: data.cr597_location || ''
+      [DATAVERSE_CONFIG.fields.name]: data.cr597_id
+      // TODO: Legg til andre felter når vi finner de riktige navnene
     };
 
     const response = await this.makeRequest(url, {
@@ -110,7 +109,8 @@ class DataverseService {
 
   // READ - Hent alle diskgolfbaner
   async getAllDiskTabs(): Promise<DiskTabRecord[]> {
-    const url = `${API_ENDPOINTS.tableUrl}?$select=${Object.values(DATAVERSE_CONFIG.fields).join(',')}&$orderby=${DATAVERSE_CONFIG.fields.name} asc`;
+    // Midlertidig: kun hent cr597_id og cr597_disktabid
+    const url = `${API_ENDPOINTS.tableUrl}?$select=cr597_disktabid,cr597_id&$orderby=cr597_id asc`;
     
     const response = await this.makeRequest(url);
     return response.value || [];
@@ -118,7 +118,8 @@ class DataverseService {
 
   // READ - Hent spesifikk diskgolfbane
   async getDiskTabById(id: string): Promise<DiskTabRecord> {
-    const url = `${API_ENDPOINTS.tableUrl}(${id})?$select=${Object.values(DATAVERSE_CONFIG.fields).join(',')}`;
+    // Midlertidig: kun hent cr597_id og cr597_disktabid
+    const url = `${API_ENDPOINTS.tableUrl}(${id})?$select=cr597_disktabid,cr597_id`;
     
     const response = await this.makeRequest(url);
     return response;

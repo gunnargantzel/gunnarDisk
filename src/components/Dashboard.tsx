@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useMsal } from '@azure/msal-react';
 import { useDataverse } from '../hooks/useDataverse';
 import { DiskTabRecord } from '../services/dataverseService';
+import MetadataDebugger from './MetadataDebugger';
 
 const Dashboard: React.FC = () => {
   const { accounts } = useMsal();
@@ -69,12 +70,9 @@ const Dashboard: React.FC = () => {
             <div key={course.cr597_disktabid} className="course-item">
               <div className="course-info">
                 <h4>{course.cr597_id}</h4>
-                <p>Antall kurver: {course.cr597_holes}</p>
-                {course.cr597_description && <p>Beskrivelse: {course.cr597_description}</p>}
-                {course.cr597_location && <p>Lokasjon: {course.cr597_location}</p>}
-                {course.createdon && (
-                  <p>Registrert: {new Date(course.createdon).toLocaleDateString('no-NO')}</p>
-                )}
+                {/* Midlertidig: kun vis cr597_id inntil vi finner de riktige feltnavnene */}
+                <p>ID: {course.cr597_disktabid}</p>
+                {/* TODO: Legg til andre felter når vi finner de riktige navnene */}
               </div>
               <div className="course-actions">
                 <button 
@@ -94,6 +92,8 @@ const Dashboard: React.FC = () => {
           Legg til ny diskgolfbane
         </button>
       </Link>
+      
+      <MetadataDebugger />
     </div>
   );
 };

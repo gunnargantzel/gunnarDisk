@@ -18,9 +18,9 @@ export const DATAVERSE_CONFIG = {
   fields: {
     id: 'cr597_disktabid',
     name: 'cr597_id', // Primary name field
-    holes: 'cr597_holes', // Antall kurver
-    description: 'cr597_description', // Beskrivelse
-    location: 'cr597_location', // Lokasjon
+    holes: 'cr597_holes', // Antall kurver - må sjekkes mot faktisk tabell
+    description: 'cr597_description', // Beskrivelse - må sjekkes mot faktisk tabell
+    location: 'cr597_location', // Lokasjon - må sjekkes mot faktisk tabell
     createdOn: 'createdon',
     modifiedOn: 'modifiedon'
   }
