@@ -4,9 +4,11 @@ import { useIsAuthenticated, useMsal } from '@azure/msal-react';
 import LoginPage from './components/LoginPage';
 import Dashboard from './components/Dashboard';
 import CourseForm from './components/CourseForm';
+import PWAInstallPrompt from './components/PWAInstallPrompt';
+import VersionInfo from './components/VersionInfo';
 import './App.css';
 
-// Versjon informasjon
+// Versjon informasjon (brukes som fallback)
 const APP_VERSION = '1.0.0';
 const BUILD_DATE = new Date().toLocaleDateString('no-NO');
 
@@ -32,12 +34,10 @@ const App: React.FC = () => {
       <header className="App-header">
         <div className="header-left">
           <h1>Diskgolf PWA</h1>
-          <div className="version-info">
-            v{APP_VERSION} • {BUILD_DATE}
-          </div>
+          <VersionInfo showDetails={false} />
         </div>
         {isAuthenticated && (
-          <button 
+          <button
             onClick={() => instance.logoutPopup()}
             className="logout-btn"
           >
@@ -45,27 +45,28 @@ const App: React.FC = () => {
           </button>
         )}
       </header>
-      
+
       <main className="App-main">
         <Routes>
-          <Route 
-            path="/" 
-            element={isAuthenticated ? <Dashboard /> : <LoginPage />} 
+          <Route
+            path="/"
+            element={isAuthenticated ? <Dashboard /> : <LoginPage />}
           />
-          <Route 
-            path="/course/new" 
-            element={isAuthenticated ? <CourseForm /> : <LoginPage />} 
+          <Route
+            path="/course/new"
+            element={isAuthenticated ? <CourseForm /> : <LoginPage />}
           />
         </Routes>
       </main>
-      
+
       <footer className="App-footer">
         <div className="footer-content">
-          <span>Diskgolf PWA v{APP_VERSION}</span>
-          <span>•</span>
-          <span>Bygget {BUILD_DATE}</span>
+          <VersionInfo showDetails={true} />
         </div>
       </footer>
+
+      {/* PWA Install Prompt */}
+      <PWAInstallPrompt />
     </div>
   );
 };

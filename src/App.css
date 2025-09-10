@@ -126,6 +126,196 @@
   margin-bottom: 0.25rem;
 }
 
+/* PWA Install Prompt */
+.pwa-install-prompt {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.pwa-install-content {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.pwa-install-icon {
+  font-size: 32px;
+  flex-shrink: 0;
+}
+
+.pwa-install-text {
+  flex: 1;
+}
+
+.pwa-install-text h3 {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.pwa-install-text p {
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.9;
+  line-height: 1.4;
+}
+
+.pwa-install-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.pwa-install-btn {
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 80px;
+}
+
+.pwa-install-btn.primary {
+  background: white;
+  color: #667eea;
+}
+
+.pwa-install-btn.secondary {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.pwa-install-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Version Info */
+.version-info-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #ccc;
+}
+
+.version-basic {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.version-number {
+  font-weight: 600;
+  color: #fff;
+}
+
+.version-build {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.version-env {
+  background: #ff6b6b;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.version-details {
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  background: white;
+  color: #333;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  min-width: 250px;
+  z-index: 100;
+}
+
+.version-detail-item {
+  margin-bottom: 6px;
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.version-detail-item:last-child {
+  margin-bottom: 0;
+}
+
+.version-copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.version-copy-btn:hover {
+  opacity: 1;
+}
+
+.version-toggle-btn {
+  background: none;
+  border: none;
+  color: #ccc;
+  cursor: pointer;
+  font-size: 10px;
+  padding: 2px;
+  transition: color 0.2s ease;
+}
+
+.version-toggle-btn:hover {
+  color: #fff;
+}
+
+/* Footer version info */
+.footer-content .version-info-container {
+  position: relative;
+}
+
+.footer-content .version-details {
+  bottom: auto;
+  top: -120px;
+}
+
 .dashboard {
   background: white;
   padding: 30px;

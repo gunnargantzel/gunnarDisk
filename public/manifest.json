@@ -1,15 +1,40 @@
 {
   "short_name": "Diskgolf PWA",
   "name": "Diskgolfbane Registrering",
+  "description": "En PWA for registrering og administrasjon av disc golf-baner",
   "icons": [
     {
       "src": "favicon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
+    },
+    {
+      "src": "favicon.ico",
+      "sizes": "192x192",
+      "type": "image/x-icon",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "favicon.ico",
+      "sizes": "512x512",
+      "type": "image/x-icon",
+      "purpose": "any maskable"
     }
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#667eea",
+  "background_color": "#ffffff",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "no",
+  "categories": ["sports", "utilities"],
+  "screenshots": [
+    {
+      "src": "favicon.ico",
+      "sizes": "1280x720",
+      "type": "image/x-icon",
+      "form_factor": "wide"
+    }
+  ]
 }
