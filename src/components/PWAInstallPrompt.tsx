@@ -9,6 +9,13 @@ interface BeforeInstallPromptEvent extends Event {
   prompt(): Promise<void>;
 }
 
+// Extend Navigator interface for iOS standalone detection
+declare global {
+  interface Navigator {
+    standalone?: boolean;
+  }
+}
+
 const PWAInstallPrompt: React.FC = () => {
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [showInstallPrompt, setShowInstallPrompt] = useState(false);
@@ -24,7 +31,7 @@ const PWAInstallPrompt: React.FC = () => {
       }
 
       // Sjekk om det er iOS og om appen er lagt til hjemmeskjerm
-      if (window.navigator.standalone === true) {
+      if ((window.navigator as any).standalone === true) {
         setIsInstalled(true);
         return;
       }
