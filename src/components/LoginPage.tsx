@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useMsal } from '@azure/msal-react';
-import { loginRequest } from '../authConfig';
+import { loginRequest, dataverseScopes } from '../authConfig';
 
 const LoginPage: React.FC = () => {
   const { instance } = useMsal();
@@ -20,15 +20,28 @@ const LoginPage: React.FC = () => {
         return;
       }
 
-      // Prøv silent login først
+      // Prøv silent login først for både Graph og Dataverse
       try {
+        // Først Graph scopes
         await instance.acquireTokenSilent({
           scopes: loginRequest.scopes,
+          account: accounts[0]
+        });
+        
+        // Deretter Dataverse scopes
+        await instance.acquireTokenSilent({
+          scopes: dataverseScopes,
           account: accounts[0]
         });
       } catch (silentError) {
         // Hvis silent login feiler, prøv popup login
         await instance.loginPopup(loginRequest);
+        
+        // Etter popup login, hent Dataverse token
+        await instance.acquireTokenPopup({
+          scopes: dataverseScopes,
+          prompt: 'select_account'
+        });
       }
     } catch (error: any) {
       console.error('Login feilet:', error);

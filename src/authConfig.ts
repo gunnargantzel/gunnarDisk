@@ -41,10 +41,17 @@ export const msalConfig: Configuration = {
 export const loginRequest: PopupRequest = {
   scopes: [
     'User.Read',
-    'https://org5ce5b264.crm4.dynamics.com/.default'
+    'openid',
+    'profile',
+    'offline_access'
   ],
   prompt: 'select_account',
 };
+
+// Dataverse-spesifikke scopes
+export const dataverseScopes = [
+  'https://org5ce5b264.crm4.dynamics.com/.default'
+];
 
 // Legg til flere scopes hvis nødvendig for Dataverse
 export const graphConfig = {

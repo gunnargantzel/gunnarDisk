@@ -1,5 +1,6 @@
 import { IPublicClientApplication } from '@azure/msal-browser';
 import { DATAVERSE_CONFIG, API_ENDPOINTS } from '../config/dataverseConfig';
+import { dataverseScopes } from '../authConfig';
 
 export interface DiskTabRecord {
   cr597_disktabid?: string;
@@ -39,7 +40,7 @@ class DataverseService {
     }
 
     const silentRequest = {
-      scopes: [`${DATAVERSE_CONFIG.environmentUrl}/.default`],
+      scopes: dataverseScopes,
       account: accounts[0]
     };
 
@@ -49,7 +50,7 @@ class DataverseService {
     } catch (error) {
       // Hvis silent token acquisition feiler, prøv popup
       const popupRequest = {
-        scopes: [`${DATAVERSE_CONFIG.environmentUrl}/.default`],
+        scopes: dataverseScopes,
         prompt: 'select_account'
       };
       
